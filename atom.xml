@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>wonderheng&#39;s blog</title>
+  
+  <subtitle>一曲肝肠断、天涯何处觅知音</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://www.wonderheng.top/"/>
+  <updated>2020-07-21T13:58:11.969Z</updated>
+  <id>http://www.wonderheng.top/</id>
+  
+  <author>
+    <name>wonderheng</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>（转）数据库重要知识点</title>
+    <link href="http://www.wonderheng.top/2019/02/17/%EF%BC%88%E8%BD%AC%EF%BC%89%E6%95%B0%E6%8D%AE%E5%BA%93%E9%87%8D%E8%A6%81%E7%9F%A5%E8%AF%86%E7%82%B9/"/>
+    <id>http://www.wonderheng.top/2019/02/17/（转）数据库重要知识点/</id>
+    <published>2019-02-17T09:37:47.000Z</published>
+    <updated>2020-07-21T13:58:11.969Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h2><h3 id="1-什么是数据库事务？事务有什么特点？"><a href="#1-什么是数据库事务？事务有什么特点？" class="headerlink" title="1. 什么是数据库事务？事务有什么特点？"></a>1. 什么是数据库事务？事务有什么特点？</h3><p><strong>数据库事务</strong>：是指作为单个逻辑工作单元执行的一系列操作，这些操作要么全做，要么全不做，是一个不可分割的工作单元。</p><p><strong>事务特点</strong>：</p><ul><li>原子性</li><li>一致性</li><li>隔离性</li><li>持久性特</li></ul><a id="more"></a><h3 id="2-主键和外键的区别？"><a href="#2-主键和外键的区别？" class="headerlink" title="2. 主键和外键的区别？"></a>2. 主键和外键的区别？</h3><ul><li>主键所在的列的值是唯一的，不可为空的</li><li>外键所在的列的值可以重复，可以为空的，不能创建对应表中不存在的外键值</li></ul><h3 id="3-truncate与delete的区别？"><a href="#3-truncate与delete的区别？" class="headerlink" title="3. truncate与delete的区别？"></a>3. truncate与delete的区别？</h3><table><thead><tr><th>比较</th><th>truncate</th><th>delete</th></tr></thead><tbody><tr><td>相同点</td><td>删除表中的全部行</td><td>不带where字句删除表中的全部行</td></tr><tr><td>相同点</td><td>删除记录，不删除表定义</td><td>删除记录，不删除表定义</td></tr><tr><td>不同点</td><td>truncate比delete速度快，且使用系统和事务日志资源少</td><td>delete每删除一行，并在事务日志中为所删除的每行记录一项</td></tr><tr><td>不同点</td><td>truncate正常情况返回0，中断什么都不返回</td><td>delete返回删除的行记录数</td></tr></tbody></table><h3 id="4-索引的作用和优缺点？"><a href="#4-索引的作用和优缺点？" class="headerlink" title="4. 索引的作用和优缺点？"></a>4. 索引的作用和优缺点？</h3><p><strong>作用：</strong></p><ul><li>索引可以大大提高系统检索的性能</li></ul><p><strong>优点：</strong></p><ul><li>通过创建唯一性索引，可以保证数据库表中每一行数据的唯一性</li><li>可以大大加快 数据的检索速度，这也是创建索引的最主要的原因</li><li>可以加速表和表之间的连接，特别是在实现数据的参考完整性方面特别有意义</li><li>在使用分组和排序 子句进行数据检索时，同样可以显著减少查询中分组和排序的时间</li><li>通过使用索引，可以在查询的过程中，使用优化隐藏器，提高系统的性能</li></ul><p><strong>缺点：</strong></p><ul><li>创建索引和维护索引要耗费时间，这种时间随着数据量的增加而增加</li><li>索引需要占物理空间，除了数据表占数据空间之外，每一个索引还要占一定的物理空间，如果要建立聚簇索引，那么需要的空间就会更大</li><li>当对表中的数据进行增加、删除和修改的时候，索引也要动态的维护，这样就降低了数据的维护速度</li></ul><h3 id="5-创建索引都有哪些注意的事项"><a href="#5-创建索引都有哪些注意的事项" class="headerlink" title="5. 创建索引都有哪些注意的事项"></a>5. 创建索引都有哪些注意的事项</h3><p><strong>适合创建索引：</strong></p><ul><li>在经常需要搜索的列上，可以加快搜索的速度。</li><li>在作为主键的列上，强制该列的唯一性和组织表中数据的排列结构。</li><li>在经常用在连接的列上，这 些列主要是一些外键，可以加快连接的速度。</li><li>在经常需要根据范围进行搜索的列上创建索引，因为索引已经排序，其指定的范围是连续的。</li><li>在经常需要排序的列上创建索引，因为索引已经排序，这样查询可以利用索引的排序，加快排序查询时间。</li><li>在经常使用在WHERE子句中的列上面创建索引，加快条件的判断速度。</li></ul><p><strong>不适合创建索引：</strong></p><ul><li>对于那些在查询中很少使用或者参考的列不应该创建索引<strong>。</strong>这是因为，既然这些列很少使用到，因此有索引或者无索引，并不能提高查询速度。相反，由于增加了索引，反而降低了系统的维护速度和增大了空间需求。</li><li>对于那些只有很少数据值（唯一性差）的列也不应该增加索引。这是因为，由于这些列的取值很少，例如人事表的性别列，在查询的结果中，结果集的数据行占了表中数据行的很大比例，即需要在表中搜索的数据行的比例很大。增加索引，并不能明显加快检索速度。</li><li>对于那些定义为text, image和bit数据类型的列不应该增加索引。这是因为，这些列的数据量要么相当大，要么取值很少。</li><li>当修改性能远远大于检索性能时，不应该创建索引。这是因为，修改性能和检索性能是互相矛盾的。当增加索引时，会提高检索性能，但是会降低修改性能。当减少索引时，会提高修改性能，降低检索性能。因此，当修改性能远远大于检索性能时，不应该创建索引。</li></ul><h3 id="6-SQL语句分为哪几类？"><a href="#6-SQL语句分为哪几类？" class="headerlink" title="6. SQL语句分为哪几类？"></a>6. SQL语句分为哪几类？</h3><ul><li>DDL(Data Definition Language)：数据定义语言，定义对数据库对象(库、表、列、索引)的操作。代表指令：CREATE、DROP、ALTER、RENAME、 TRUNCATE等</li><li>DML(Data Manipulation Language)：数据操作语言，定义对数据库记录的操作。代表指令：INSERT、DELETE、UPDATE、SELECT等</li><li>DCL(Data Control Language)：数据控制语言，定义对数据库、表、字段、用户的访问权限和安全级别。代表指令：GRANT、REVOKE，COMMIT、ROLLBACK、SAVEPOINT等</li></ul><h3 id="7-MySQL存储引擎有哪些，各自有什么特点？"><a href="#7-MySQL存储引擎有哪些，各自有什么特点？" class="headerlink" title="7. MySQL存储引擎有哪些，各自有什么特点？"></a>7. MySQL存储引擎有哪些，各自有什么特点？</h3><ul><li>存储引擎是：数据库管理系统如何存储数据、如何为存储的数据建立索引和如何更新、查询数据等技术的实现方法。MySQL的核心就是插件式存储引擎，支持多种存储引擎。</li><li>主要回答下表中<code>MyISAM</code>,<code>InnoDB</code>,<code>Memory</code>三个引擎即可，区别就是各自的<code>Feature</code>不一样，标<code>✔</code>的标识该引擎支持对应的特性。</li></ul><div align="center"><br>    <img src="https://wonderhengblog.oss-cn-beijing.aliyuncs.com/post/2019-02-17/1.png" height="500" width="900"><br></div><h3 id="8-MySQL都支持那些索引？"><a href="#8-MySQL都支持那些索引？" class="headerlink" title="8. MySQL都支持那些索引？"></a>8. MySQL都支持那些索引？</h3><p>支持的索引如下：</p><ul><li>主键索引(primary key)</li><li>唯一索引(unique)</li><li>普通索引(index)</li><li>全文索引(fulltext) （InnoDB引擎不支持全文索引，MyISAM引擎支持全文索引）</li></ul><h3 id="9-什么是存储过程？"><a href="#9-什么是存储过程？" class="headerlink" title="9. 什么是存储过程？"></a>9. 什么是存储过程？</h3><p>存储过程是一个预编译的SQL 语句，优点是允许模块化的设计，就是说只需创建一次，以后在该程序中就可以调用多次。如果某次操作需要执行多次SQL ，使用存储过程比单纯SQL 语句执行要快。可以用一个命令对象（call）来调用存储过程。</p><h3 id="10-视图的优缺点？"><a href="#10-视图的优缺点？" class="headerlink" title="10. 视图的优缺点？"></a>10. 视图的优缺点？</h3><p><strong>优点：</strong></p><ul><li>对数据库的访问，因为视图可以有选择性的选取数据库里的一部分。</li><li>用户通过简单的查询可以从复杂查询中得到结果。</li><li>维护数据的独立性，试图可从多个表检索数据。</li><li>对于相同的数据可产生不同的视图。</li><li>视图可以提高安全性，必须具有足够的访问权限</li></ul><p><strong>缺点：</strong></p><ul><li>性能影响，查询视图时，必须把视图的查询转化成对基本表的查询，如果这个视图是由一个复杂的多表查询所定义，那么就无法更改数据</li></ul><h3 id="11-列举几种表连接方式以及区别？"><a href="#11-列举几种表连接方式以及区别？" class="headerlink" title="11. 列举几种表连接方式以及区别？"></a>11. 列举几种表连接方式以及区别？</h3><p><strong>连接方式：</strong></p><ul><li>内连接</li><li>自连接</li><li>外连接（左、右、全）</li><li>交叉连接</li></ul><p><strong>连接方式说明：</strong></p><ul><li>内连接：只有两个元素表相匹配的才能在结果集中显示。</li><li>外连接：<ul><li>左外连接：左边为驱动表，驱动表的数据全部显示，匹配表的不匹配的不会显示。</li><li>右外连接：右边为驱动表，驱动表的数据全部显示，匹配表的不匹配的不会显示。</li><li>全外连接：连接的表中不匹配的数据全部会显示出来。</li></ul></li><li>交叉连接： 笛卡尔效应，显示的结果是链接表数的乘积。</li></ul><h3 id="12-数据库的三范式"><a href="#12-数据库的三范式" class="headerlink" title="12. 数据库的三范式"></a>12. 数据库的三范式</h3><p><strong>范式：</strong></p><ul><li>第一范式：当关系模式R的所有属性都不能在分解为更基本的数据单位时，称R是满足第一范式的，简记为1NF。满足第一范式是关系模式规范化的最低要求，否则，将有很多基本操作在这样的关系模式中实现不了。</li><li>第二范式：如果关系模式R满足第一范式，并且R得所有非主属性都完全依赖于R的每一个候选关键属性，称R满足第二范式，简记为2NF。</li><li>第三范式：设R是一个满足第一范式条件的关系模式，X是R的任意属性集，如果X非传递依赖于R的任意一个候选关键字，称R满足第三范式，简记为3NF. 数据不能存在传递关系，即每个属性都跟主键有直接关系而不是间接关系。</li></ul><p><strong>参考资料：</strong></p><ul><li><a href="https://www.cnblogs.com/knowledgesea/p/3667395.html" target="_blank" rel="noopener">数据库设计三大范式</a></li></ul><p><strong>实际使用：</strong>三大范式只是一般设计数据库的基本理念，可以建立冗余较小、结构合理的数据库。如果有特殊情况，当然要特殊对待，数据库设计最重要的是看需求和性能，需求&gt;性能&gt;表结构。所以不能一味的去追求范式建立数据库</p><h3 id="13-SQL的关键字执行顺序"><a href="#13-SQL的关键字执行顺序" class="headerlink" title="13. SQL的关键字执行顺序"></a>13. SQL的关键字执行顺序</h3><p>SQL查询中各个关键字的执行先后顺序：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">from &gt; on&gt; join &gt; where &gt;  group by &gt; with &gt; having &gt; select &gt; distinct  &gt; order by  &gt; limit</span><br></pre></td></tr></table></figure><p><strong>参考资料：</strong>《MySQL技术内幕：SQL编程 第三章查询处理》</p><h2 id="场景分析"><a href="#场景分析" class="headerlink" title="场景分析"></a>场景分析</h2><h3 id="1-如果有1000万条数据，执行库查询时如何提高查询效率？"><a href="#1-如果有1000万条数据，执行库查询时如何提高查询效率？" class="headerlink" title="1. 如果有1000万条数据，执行库查询时如何提高查询效率？"></a>1. 如果有1000万条数据，执行库查询时如何提高查询效率？</h3><p>问题分析：从1000万这个数字可以定位到考察数据量特别大的情况下如何提升查询效率。</p><ul><li><strong>数据库设计方面</strong><ul><li>建立索引</li><li>数据表分区</li><li>尽量使用固定长度的字段</li><li>限制字段长度</li><li>分表，分库</li></ul></li><li><strong>数据库I/O方面</strong><ul><li>增加缓冲器</li><li>涉及表的级联，不同的表存储在不同的磁盘上，以增加I/O速度</li><li>改善物理设备，比如更换固态硬盘</li></ul></li><li><strong>在SQL语句方面</strong><ul><li>优化SQL语句，较少比较次数</li><li>限制返回的记录数，进行分页查询</li></ul></li><li><strong>在Java方面</strong><ul><li>反复查询，使用<code>preparedStatement</code>减少查询次数</li><li>考虑数据缓存，较少数据库访问</li></ul></li></ul><p><br></p><p>感谢本文作者[<strong>secondriver</strong>]，转载请注明原地址：<a href="http://blog.51cto.com/aiilive/2309361" target="_blank" rel="noopener">http://blog.51cto.com/aiilive/2309361</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;基础概念&quot;&gt;&lt;a href=&quot;#基础概念&quot; class=&quot;headerlink&quot; title=&quot;基础概念&quot;&gt;&lt;/a&gt;基础概念&lt;/h2&gt;&lt;h3 id=&quot;1-什么是数据库事务？事务有什么特点？&quot;&gt;&lt;a href=&quot;#1-什么是数据库事务？事务有什么特点？&quot; class=&quot;headerlink&quot; title=&quot;1. 什么是数据库事务？事务有什么特点？&quot;&gt;&lt;/a&gt;1. 什么是数据库事务？事务有什么特点？&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;数据库事务&lt;/strong&gt;：是指作为单个逻辑工作单元执行的一系列操作，这些操作要么全做，要么全不做，是一个不可分割的工作单元。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;事务特点&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;原子性&lt;/li&gt;
+&lt;li&gt;一致性&lt;/li&gt;
+&lt;li&gt;隔离性&lt;/li&gt;
+&lt;li&gt;持久性特&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+    
+      <category term="MySQL" scheme="http://www.wonderheng.top/tags/MySQL/"/>
+    
+      <category term="数据库" scheme="http://www.wonderheng.top/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+  </entry>
+  
+</feed>
